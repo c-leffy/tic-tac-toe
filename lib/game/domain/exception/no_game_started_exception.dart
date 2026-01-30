@@ -1,0 +1,1 @@
+class NoGameStartedException implements Exception {}
