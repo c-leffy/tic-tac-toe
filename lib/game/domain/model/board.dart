@@ -19,6 +19,8 @@ class Board extends Equatable {
 
   Iterable<Iterable<Cell>> get diagonals => [_mainDiagonal, _antiDiagonal];
 
+  Iterable<Cell> get emptyCells => _cells.where((cell) => cell.symbol == Symbol.empty);
+
   bool isFull() => _cells.every((cell) => cell.symbol != Symbol.empty);
 
   Board playAt(int x, int y, Symbol symbol) {

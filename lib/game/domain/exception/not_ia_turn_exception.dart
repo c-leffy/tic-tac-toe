@@ -1,0 +1,1 @@
+class NotIaTurnException implements Exception {}
