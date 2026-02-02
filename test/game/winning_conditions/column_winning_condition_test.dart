@@ -1,7 +1,8 @@
 import 'package:test/test.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/domain/model/cell.dart';
-import 'package:tic_tac_toe/game/domain/model/game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/has_winner_game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/ia_turn_game.dart';
 
 import '../builder/game_builder.dart';
 

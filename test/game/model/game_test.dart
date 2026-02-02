@@ -1,10 +1,13 @@
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 import 'package:tic_tac_toe/game/domain/exception/game_over_exception.dart';
-import 'package:tic_tac_toe/game/domain/exception/not_player_turn_exception.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/domain/model/cell.dart';
-import 'package:tic_tac_toe/game/domain/model/game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/draw_game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/has_winner_game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/ia_turn_game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/player_turn_game.dart';
+import 'package:tic_tac_toe/game/domain/model/symbol.dart';
 
 import '../builder/game_builder.dart';
 
@@ -70,12 +73,16 @@ void main() {
     });
   });
 
-  test("Can't play if this is IA's turn", () {
+  test("After IA's turn and no winning condition, should be player's turn", () {
     // given
     final game = aGame().buildIaTurn();
 
+    // when
+    final updatedGame = game.playAt(x: 0, y: 0);
+
     // then
-    expect(() => game.playAt(x: 0, y: 0), throwsA(isA<NotPlayerTurnException>()));
+    expect(updatedGame, isA<PlayerTurnGame>());
+    expect(updatedGame.board.rows.first.first.symbol, Symbol.o);
   });
 
   test("Can't play if game is already won", () {

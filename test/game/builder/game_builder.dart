@@ -1,6 +1,10 @@
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/domain/model/difficulty.dart';
 import 'package:tic_tac_toe/game/domain/model/game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/draw_game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/has_winner_game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/ia_turn_game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/player_turn_game.dart';
 
 GameBuilder aGame() => GameBuilder();
 

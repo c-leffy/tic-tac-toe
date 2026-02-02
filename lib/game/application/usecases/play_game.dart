@@ -1,5 +1,7 @@
 import 'package:tic_tac_toe/game/domain/exception/no_game_started_exception.dart';
+import 'package:tic_tac_toe/game/domain/exception/not_player_turn_exception.dart';
 import 'package:tic_tac_toe/game/domain/model/game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/player_turn_game.dart';
 import 'package:tic_tac_toe/game/domain/repository/game_repository.dart';
 
 class PlayGame {
@@ -9,10 +11,11 @@ class PlayGame {
 
   Future<Game> execute(PlayGameCommand command) async {
     final game = await _gameRepository.currentGame();
-    if (game == null) {
-      throw NoGameStartedException();
-    }
+    if (game == null) throw NoGameStartedException();
+    if (game is! PlayerTurnGame) throw NotPlayerTurnException();
+
     final updatedGame = game.playAt(x: command.x, y: command.y);
+
     await _gameRepository.save(updatedGame);
     return updatedGame;
   }

@@ -1,6 +1,7 @@
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/domain/model/difficulty.dart';
 import 'package:tic_tac_toe/game/domain/model/game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/player_turn_game.dart';
 import 'package:tic_tac_toe/game/domain/repository/game_repository.dart';
 
 class StartGame {
