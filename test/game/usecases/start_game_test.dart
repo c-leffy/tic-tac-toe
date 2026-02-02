@@ -1,9 +1,9 @@
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 import 'package:tic_tac_toe/game/application/usecases/start_game.dart';
-import 'package:tic_tac_toe/game/data/local/in_memory_game_repository.dart';
+import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
-import 'package:tic_tac_toe/game/domain/repository/game_repository.dart';
+import 'package:tic_tac_toe/game/application/ports/game_repository.dart';
 
 import '../builder/game_builder.dart';
 

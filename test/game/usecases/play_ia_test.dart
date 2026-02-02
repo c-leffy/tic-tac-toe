@@ -1,12 +1,12 @@
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
 import 'package:tic_tac_toe/game/application/usecases/play_ia.dart';
-import 'package:tic_tac_toe/game/data/local/in_memory_game_repository.dart';
+import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 import 'package:tic_tac_toe/game/domain/exception/no_game_started_exception.dart';
 import 'package:tic_tac_toe/game/domain/exception/not_ia_turn_exception.dart';
 import 'package:tic_tac_toe/game/domain/model/state/player_turn_game.dart';
 import 'package:tic_tac_toe/game/domain/model/symbol.dart';
-import 'package:tic_tac_toe/game/domain/repository/game_repository.dart';
+import 'package:tic_tac_toe/game/application/ports/game_repository.dart';
 
 import '../builder/game_builder.dart';
 
