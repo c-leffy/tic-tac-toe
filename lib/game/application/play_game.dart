@@ -8,11 +8,11 @@ class PlayGame {
   const PlayGame(this._gameRepository);
 
   Future<Game> execute(PlayGameCommand command) async {
-    final currentGame = await _gameRepository.currentGame();
-    if (currentGame == null) {
+    final game = await _gameRepository.currentGame();
+    if (game == null) {
       throw NoGameStartedException();
     }
-    final updatedGame = currentGame.playAt(x: command.x, y: command.y, symbol: .x);
+    final updatedGame = game.playAt(x: command.x, y: command.y);
     await _gameRepository.save(updatedGame);
     return updatedGame;
   }

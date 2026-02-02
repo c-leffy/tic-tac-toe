@@ -13,11 +13,13 @@ class Board extends Equatable {
     return Board(List.generate(9, (index) => Cell(x: index % 3, y: index ~/ 3)));
   }
 
-  bool hasCompleteRow() => _rows.any(_isComplete);
+  Iterable<List<Cell>> get rows => _cells.groupBy((cell) => cell.y).values;
 
-  bool hasCompleteColumn() => _columns.any(_isComplete);
+  Iterable<List<Cell>> get columns => _cells.groupBy((cell) => cell.x).values;
 
-  bool hasCompleteDiagonal() => _diagonals.any(_isComplete);
+  Iterable<Iterable<Cell>> get diagonals => [_mainDiagonal, _antiDiagonal];
+
+  bool isFull() => _cells.every((cell) => cell.symbol != Symbol.empty);
 
   Board playAt(int x, int y, Symbol symbol) {
     final cellIndex = _cells.indexWhere((cell) => cell.x == x && cell.y == y && cell.symbol == Symbol.empty);
@@ -32,19 +34,9 @@ class Board extends Equatable {
     return Board(updatedCells);
   }
 
-  Iterable<List<Cell>> get _rows => _cells.groupBy((cell) => cell.y).values;
-
-  Iterable<List<Cell>> get _columns => _cells.groupBy((cell) => cell.x).values;
-
   Iterable<Cell> get _mainDiagonal => _cells.where((cell) => cell.x == cell.y);
 
   Iterable<Cell> get _antiDiagonal => _cells.where((cell) => cell.x + cell.y == 2);
-
-  Iterable<Iterable<Cell>> get _diagonals => [_mainDiagonal, _antiDiagonal];
-
-  bool _isComplete(Iterable<Cell> cells) =>
-      cells.every((cell) => cell.symbol != Symbol.empty) && //
-      cells.every((cell) => cell.symbol == cells.first.symbol);
 
   @override
   List<Object?> get props => [_cells];

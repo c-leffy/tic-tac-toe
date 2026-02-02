@@ -3,7 +3,6 @@ import 'package:test/scaffolding.dart';
 import 'package:tic_tac_toe/game/application/start_game.dart';
 import 'package:tic_tac_toe/game/data/local/in_memory_game_repository.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
-import 'package:tic_tac_toe/game/domain/model/player.dart';
 import 'package:tic_tac_toe/game/domain/repository/game_repository.dart';
 
 import '../builder/game_builder.dart';
@@ -21,7 +20,6 @@ void main() {
     // then
     final expectedGame = aGame()
         .board(Board.generate3x3()) //
-        .player(Player.player("Guest"))
         .difficulty(.medium)
         .build();
     expect(game, equals(expectedGame));
@@ -45,7 +43,6 @@ void main() {
     // then
     final expectedGame = aGame()
         .board(Board.generate3x3()) //
-        .player(Player.player("Guest"))
         .difficulty(.difficult)
         .build();
     expect(game, equals(expectedGame));

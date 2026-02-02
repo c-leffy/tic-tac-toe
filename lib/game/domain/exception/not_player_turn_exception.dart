@@ -1,0 +1,1 @@
+class NotPlayerTurnException implements Exception {}

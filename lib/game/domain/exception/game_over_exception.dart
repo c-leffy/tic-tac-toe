@@ -1,0 +1,1 @@
+class GameOverException implements Exception {}
