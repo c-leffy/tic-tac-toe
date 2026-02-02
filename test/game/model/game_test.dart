@@ -4,9 +4,9 @@ import 'package:tic_tac_toe/game/domain/exception/game_over_exception.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/domain/model/cell.dart';
 import 'package:tic_tac_toe/game/domain/model/state/draw_game.dart';
-import 'package:tic_tac_toe/game/domain/model/state/has_winner_game.dart';
 import 'package:tic_tac_toe/game/domain/model/state/ia_turn_game.dart';
 import 'package:tic_tac_toe/game/domain/model/state/player_turn_game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/player_won_game.dart';
 import 'package:tic_tac_toe/game/domain/model/symbol.dart';
 
 import '../builder/game_builder.dart';
@@ -37,7 +37,7 @@ void main() {
       final updatedGame = game.playAt(x: 2, y: 0);
 
       // then
-      expect(updatedGame, isA<HasWinnerGame>());
+      expect(updatedGame, isA<PlayerWonGame>());
     });
 
     test('and no winning condition and a full board, should be a draw', () {
@@ -85,9 +85,17 @@ void main() {
     expect(updatedGame.board.rows.first.first.symbol, Symbol.o);
   });
 
-  test("Can't play if game is already won", () {
+  test("Can't play if game is already won by IA", () {
     // given
-    final game = aGame().buildHasWinner();
+    final game = aGame().buildIaWon();
+
+    // then
+    expect(() => game.playAt(x: 0, y: 0), throwsA(isA<GameOverException>()));
+  });
+
+  test("Can't play if game is already won by player", () {
+    // given
+    final game = aGame().buildPlayerWon();
 
     // then
     expect(() => game.playAt(x: 0, y: 0), throwsA(isA<GameOverException>()));

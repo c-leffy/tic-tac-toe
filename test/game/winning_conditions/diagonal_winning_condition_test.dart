@@ -1,8 +1,8 @@
 import 'package:test/test.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/domain/model/cell.dart';
-import 'package:tic_tac_toe/game/domain/model/state/has_winner_game.dart';
 import 'package:tic_tac_toe/game/domain/model/state/ia_turn_game.dart';
+import 'package:tic_tac_toe/game/domain/model/state/player_won_game.dart';
 
 import '../builder/game_builder.dart';
 
@@ -40,7 +40,7 @@ void main() {
         final updatedGame = game.playAt(x: 0, y: 2);
 
         // then
-        expect(updatedGame, isA<HasWinnerGame>());
+        expect(updatedGame, isA<PlayerWonGame>());
       },
     );
 
@@ -76,7 +76,7 @@ void main() {
         final updatedGame = game.playAt(x: 2, y: 2);
 
         // then
-        expect(updatedGame, isA<HasWinnerGame>());
+        expect(updatedGame, isA<PlayerWonGame>());
       },
     );
   });
