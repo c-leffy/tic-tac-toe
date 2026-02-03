@@ -16,15 +16,16 @@ void main() {
     final router = GoRouter(
       initialLocation: '/',
       routes: [
-        GoRoute(path: '/', builder: (_, __) => const HomePage()),
-        GoRoute(path: '/game', builder: (_, __) => const Scaffold(body: Text('Game Page'))),
+        GoRoute(path: '/', builder: (_, _) => const HomePage()),
+        GoRoute(
+          path: '/game',
+          builder: (_, _) => const Scaffold(body: Text('Game Page')),
+        ),
       ],
     );
 
     return ProviderScope(
-      overrides: [
-        if (startGameUseCase != null) startGameUseCaseProvider.overrideWithValue(startGameUseCase),
-      ],
+      overrides: [if (startGameUseCase != null) startGameUseCaseProvider.overrideWithValue(startGameUseCase)],
       child: MaterialApp.router(
         routerConfig: router,
         localizationsDelegates: AppLocalizations.localizationsDelegates,
