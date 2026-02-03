@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tic_tac_toe/core/l10n/core_l10n.dart';
+import 'package:tic_tac_toe/core/style/theme.dart';
+import 'package:tic_tac_toe/l10n/generated/app_localizations.dart';
 import 'package:tic_tac_toe/router.dart';
 
-void main() {
-  runApp(ProviderScope(child: const TicTacToeApp()));
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  runApp(const ProviderScope(child: TicTacToeApp()));
 }
 
 class TicTacToeApp extends StatelessWidget {
@@ -12,9 +18,11 @@ class TicTacToeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      title: 'Tic Tac Toe',
-      theme: ThemeData(colorScheme: .fromSeed(seedColor: Colors.deepPurple)),
+      onGenerateTitle: (context) => context.l10n.appTitle,
+      theme: appTheme,
       routerConfig: router,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
     );
   }
 }
