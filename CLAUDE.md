@@ -44,9 +44,71 @@ Tests are in `test/game/` mirroring the source structure:
 - `winning_conditions/` — Board win detection (rows, columns, diagonals)
 - `strategy/` — IA strategy tests (random, blocking, minimax)
 - `model/` — Game state transition tests
+- `presentation/view/` — Page widget tests
+- `presentation/viewmodel/` — Notifier tests
+- `presentation/widgets/` — Widget tests (board, cell, game)
 - `builder/game_builder.dart` — Test builder pattern for constructing `Game` instances
 
 Tests use Given-When-Then structure with descriptive ASCII board representations in test names. Prefer fakes and stubs over mocks.
+
+### Widget Testing Patterns
+
+**Parameterized tests with Dart 3 records:**
+```dart
+final scenarios = [
+  (GameStatusViewModel.playerTurn, 'Your turn'),
+  (GameStatusViewModel.victory, 'Victory!'),
+];
+
+for (final (status, expectedMessage) in scenarios) {
+  testWidgets('Should display $expectedMessage', (tester) async { ... });
+}
+```
+
+**Faking providers:**
+```dart
+// For Notifiers: use overrideWith
+homeNotifierProvider.overrideWith(() => FakeHomeNotifier())
+
+// For simple providers: use overrideWithValue
+startGameUseCaseProvider.overrideWithValue(FakeStartGame())
+```
+
+**Faking use cases:**
+```dart
+class _FakeStartGame implements StartGame {
+  @override
+  Future<Game> execute(StartGameCommand command) async =>
+      PlayerTurnGame(board: Board.generate3x3(), difficulty: command.difficulty);
+}
+```
+
+**Testing navigation with `ref.listen()`:**
+- `ref.listen()` only fires on state *changes*, not the initial state.
+- To test navigation, simulate a state change (e.g., `idle` → `gameStarted`).
+
+**Scrolling to off-screen elements:**
+```dart
+await tester.scrollUntilVisible(find.text('Play'), 100);
+await tester.tap(find.text('Play'));
+```
+
+**Testing `Visibility` widget:**
+```dart
+final visibility = tester.widget<Visibility>(find.byType(Visibility));
+expect(visibility.visible, isFalse);
+```
+
+**Use domain objects in tests** instead of `@visibleForTesting` constructors:
+```dart
+BoardViewModel createBoard({List<(int x, int y, Symbol symbol)> plays = const []}) {
+  var board = Board.generate3x3();
+  for (final (x, y, symbol) in plays) {
+    board = board.playAt(x, y, symbol);
+  }
+  return BoardViewModel.from(board);
+}
+```
 
 ## Flutter Rules
 
@@ -96,6 +158,36 @@ This project uses **Riverpod** (`flutter_riverpod`) with the **MVI pattern**, in
 - The Notifier maps domain models to screen states via a `_mapToScreenState()` method. The View never imports domain state types.
 - Use `AsyncNotifier` with `AsyncNotifierProvider.autoDispose`. The `AsyncValue` wrapper handles loading/error; the sealed class handles data states.
 - Separate ephemeral state (widget-local) from app state (Riverpod providers).
+
+**Navigation via `ref.listen()`:**
+
+For actions that trigger navigation (e.g., starting a game), use a Notifier with state transitions and `ref.listen()` in the view:
+
+```dart
+// Notifier with action states
+enum HomeState { idle, loading, gameStarted }
+
+class HomeNotifier extends Notifier<HomeState> {
+  @override
+  HomeState build() => HomeState.idle;
+
+  Future<void> startGame(Difficulty difficulty) async {
+    state = HomeState.loading;
+    await ref.read(startGameUseCaseProvider).execute(...);
+    state = HomeState.gameStarted;
+  }
+}
+
+// View listens and navigates on state change
+ref.listen(homeNotifierProvider, (_, state) {
+  if (state == HomeState.gameStarted) {
+    ref.read(homeNotifierProvider.notifier).reset();
+    context.go('/game');
+  }
+});
+```
+
+This pattern separates business logic (Notifier) from navigation effects (View).
 
 ### Code Quality
 
