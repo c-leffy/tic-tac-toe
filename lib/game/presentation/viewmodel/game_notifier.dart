@@ -1,10 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tic_tac_toe/game/application/usecases/play_game.dart';
 import 'package:tic_tac_toe/game/domain/exception/no_game_started_exception.dart';
 import 'package:tic_tac_toe/game/infrastructure/configuration/game_configuration.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/game_screen_state.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/game_state_mapper.dart';
+import 'package:tic_tac_toe/logs/infrastructure/configuration/logs_configuration.dart';
 
 class GameNotifier extends AsyncNotifier<GameScreenState> {
   @override
@@ -35,8 +35,7 @@ class GameNotifier extends AsyncNotifier<GameScreenState> {
         await _playIa();
       }
     } catch (e) {
-      // TODO: Add logger
-      debugPrint('Error playing: $e');
+      ref.read(logsProvider).e("Error playing: $e");
     }
   }
 
@@ -48,8 +47,7 @@ class GameNotifier extends AsyncNotifier<GameScreenState> {
       final game = await playIa.execute();
       state = AsyncValue.data(game.toState());
     } catch (e) {
-      // TODO: Add logger
-      debugPrint('Error playing IA: $e');
+      ref.read(logsProvider).e("Error playing IA: $e");
     }
   }
 }
