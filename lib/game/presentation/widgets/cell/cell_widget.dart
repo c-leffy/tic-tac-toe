@@ -1,0 +1,28 @@
+import 'package:flutter/material.dart';
+import 'package:tic_tac_toe/core/style/size.dart';
+import 'package:tic_tac_toe/core/style/theme.dart';
+import 'package:tic_tac_toe/game/presentation/viewmodel/cell_view_model.dart';
+import 'package:tic_tac_toe/game/presentation/widgets/cell/symbol_icon.dart';
+
+class CellWidget extends StatelessWidget {
+  final CellViewModel cell;
+  final double size;
+  final VoidCallback? onTap;
+
+  const CellWidget({super.key, required this.cell, required this.size, this.onTap});
+
+  @override
+  Widget build(BuildContext context) => GestureDetector(
+    onTap: onTap,
+    child: Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        color: AppColors.surface,
+        border: Border.all(color: AppColors.border, width: Size.tiny),
+        borderRadius: BorderRadius.circular(Size.tiny),
+      ),
+      child: SymbolIcon(symbol: cell.symbol),
+    ),
+  );
+}
