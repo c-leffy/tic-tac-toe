@@ -1,20 +1,23 @@
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
+import 'package:tic_tac_toe/game/application/ports/game_repository.dart';
 import 'package:tic_tac_toe/game/application/usecases/play_ia.dart';
-import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 import 'package:tic_tac_toe/game/domain/exception/no_game_started_exception.dart';
 import 'package:tic_tac_toe/game/domain/exception/not_ia_turn_exception.dart';
 import 'package:tic_tac_toe/game/domain/model/state/player_turn_game.dart';
 import 'package:tic_tac_toe/game/domain/model/symbol.dart';
-import 'package:tic_tac_toe/game/application/ports/game_repository.dart';
+import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 
+import '../../analytics/fake/no_analytics.dart';
 import '../builder/game_builder.dart';
+
+PlayIa createPlayIa(GameRepository gameRepository) => PlayIa(gameRepository, const NoAnalytics());
 
 void main() {
   test("Can't play if there is no game", () async {
     // given
     final GameRepository gameRepository = InMemoryGameRepository();
-    final playIa = PlayIa(gameRepository);
+    final playIa = createPlayIa(gameRepository);
 
     // then
     expect(() async {
@@ -26,7 +29,7 @@ void main() {
     // given
     final game = aGame().build();
     final GameRepository gameRepository = InMemoryGameRepository(game: game);
-    final playIa = PlayIa(gameRepository);
+    final playIa = createPlayIa(gameRepository);
 
     // then
     expect(() async {
@@ -38,7 +41,7 @@ void main() {
     // given
     final game = aGame().buildIaTurn();
     final GameRepository gameRepository = InMemoryGameRepository(game: game);
-    final playIa = PlayIa(gameRepository);
+    final playIa = createPlayIa(gameRepository);
 
     // when
     final updatedGame = await playIa.execute();
@@ -53,7 +56,7 @@ void main() {
     // given
     final game = aGame().buildIaTurn();
     final GameRepository gameRepository = InMemoryGameRepository(game: game);
-    final playIa = PlayIa(gameRepository);
+    final playIa = createPlayIa(gameRepository);
 
     // when
     await playIa.execute();

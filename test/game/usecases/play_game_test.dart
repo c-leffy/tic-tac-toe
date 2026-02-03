@@ -1,22 +1,25 @@
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
+import 'package:tic_tac_toe/game/application/ports/game_repository.dart';
 import 'package:tic_tac_toe/game/application/usecases/play_game.dart';
-import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 import 'package:tic_tac_toe/game/domain/exception/cell_not_available_exception.dart';
 import 'package:tic_tac_toe/game/domain/exception/no_game_started_exception.dart';
 import 'package:tic_tac_toe/game/domain/exception/not_player_turn_exception.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/domain/model/cell.dart';
 import 'package:tic_tac_toe/game/domain/model/state/ia_turn_game.dart';
-import 'package:tic_tac_toe/game/application/ports/game_repository.dart';
+import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 
+import '../../analytics/fake/no_analytics.dart';
 import '../builder/game_builder.dart';
+
+PlayGame createPlayGame(GameRepository gameRepository) => PlayGame(gameRepository, const NoAnalytics());
 
 void main() {
   test("Can't play if there is no game", () async {
     // given
     final GameRepository gameRepository = InMemoryGameRepository();
-    final playGame = PlayGame(gameRepository);
+    final playGame = createPlayGame(gameRepository);
 
     // then
     expect(() async {
@@ -29,7 +32,7 @@ void main() {
     // given
     final game = aGame().buildIaTurn();
     final GameRepository gameRepository = InMemoryGameRepository(game: game);
-    final playGame = PlayGame(gameRepository);
+    final playGame = createPlayGame(gameRepository);
 
     // then
     expect(() async {
@@ -51,7 +54,7 @@ void main() {
         ) //
         .build();
     final GameRepository gameRepository = InMemoryGameRepository(game: game);
-    final playGame = PlayGame(gameRepository);
+    final playGame = createPlayGame(gameRepository);
 
     // then
     expect(() async {
@@ -77,7 +80,7 @@ void main() {
         ) //
         .build();
     final GameRepository gameRepository = InMemoryGameRepository(game: game);
-    final playGame = PlayGame(gameRepository);
+    final playGame = createPlayGame(gameRepository);
 
     // then
     expect(() async {
@@ -99,7 +102,7 @@ void main() {
         ) //
         .build();
     final GameRepository gameRepository = InMemoryGameRepository(game: game);
-    final playGame = PlayGame(gameRepository);
+    final playGame = createPlayGame(gameRepository);
 
     // when
     final currentGame = await playGame.execute(PlayGameCommand(x: 0, y: 0));

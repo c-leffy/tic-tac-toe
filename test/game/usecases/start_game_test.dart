@@ -1,18 +1,21 @@
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
-import 'package:tic_tac_toe/game/application/usecases/start_game.dart';
-import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
-import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/application/ports/game_repository.dart';
+import 'package:tic_tac_toe/game/application/usecases/start_game.dart';
+import 'package:tic_tac_toe/game/domain/model/board.dart';
+import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 
+import '../../analytics/fake/no_analytics.dart';
 import '../builder/game_builder.dart';
+
+StartGame createStartGame(GameRepository gameRepository) => StartGame(gameRepository, const NoAnalytics());
 
 void main() {
   test("With no game in progress, should start a new game", () async {
     // given
     final GameRepository gameRepository = InMemoryGameRepository();
     final command = StartGameCommand(difficulty: .medium);
-    final startGame = StartGame(gameRepository);
+    final startGame = createStartGame(gameRepository);
 
     // when
     final game = await startGame.execute(command);
@@ -35,7 +38,7 @@ void main() {
         .build();
     final GameRepository gameRepository = InMemoryGameRepository(game: gameInProgress);
     final command = StartGameCommand(difficulty: .difficult);
-    final startGame = StartGame(gameRepository);
+    final startGame = createStartGame(gameRepository);
 
     // when
     final game = await startGame.execute(command);
