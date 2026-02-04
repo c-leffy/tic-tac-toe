@@ -1,31 +1,66 @@
-# Technical Challenge: Tic-Tac-Toe (Flutter)
+<div align="center">
+  <img src="assets/icon/icon.png" alt="Tic Tac Toe" width="200">
+  <h1>Tic-Tac-Toe</h1>
+</div>
 
-## Objective
+A Flutter implementation of the classic Tic-Tac-Toe game featuring Human vs CPU gameplay, built with Clean Architecture principles.
 
-Build a Tic-Tac-Toe application in Flutter that allows a player to play locally against a computer-controlled opponent (AI).
+[![Play Online](https://img.shields.io/badge/Play-Online-blue?style=for-the-badge)](https://c-leffy.github.io/tic-tac-toe/)
 
-## Requirements
+## Overview
 
-### Architecture
+Challenge the AI in this classic game! Choose your difficulty level and try to beat the computer:
+- **Easy** - Random moves
+- **Medium** - Blocks your winning moves
+- **Difficult** - Unbeatable (Minimax algorithm)
 
-The application should follow Clean Architecture principles.
+## Getting Started
 
-### Game Mode
+### Prerequisites
 
-Local play only: Human vs CPU.
+- [Flutter SDK](https://docs.flutter.dev/get-started/install) (3.0+)
 
-### Delivery
+### Installation
 
-Provide the solution as a Git repository.
+```bash
+# Clone the repository
+git clone https://github.com/c-leffy/tic-tac-toe.git
+cd tic-tac-toe
 
-### Evaluation Criteria
+# Install dependencies
+flutter pub get
 
-You are free to make your own technical and design choices.
+# Run the app
+flutter run
+```
 
-The goal of this exercise is to showcase your engineering standards and your vision of a production-ready Flutter application.
+## Commands
 
-This project will serve as a technical foundation for discussion during the interview.
+| Command             | Description                      |
+|---------------------|----------------------------------|
+| `flutter pub get`   | Install dependencies             |
+| `flutter run`       | Run on connected device/emulator |
+| `flutter test`      | Run all tests                    |
+| `flutter analyze`   | Run static analysis              |
+| `flutter build web` | Build for web deployment         |
 
-Feel free to reach out if you have questions or difficulties 😊
+## Architecture
 
-You have **2 weeks** to complete this test.
+This project follows **Clean Architecture** (Ports & Adapters) with four distinct layers:
+
+| Layer              | Purpose                                          |
+|--------------------|--------------------------------------------------|
+| **Domain**         | Models, business logic, strategies               |
+| **Application**    | Use cases, ports (abstract interfaces)           |
+| **Infrastructure** | Repository implementations, dependency injection |
+| **Presentation**   | Views, ViewModels, Widgets                       |
+
+**Dependency rule**: Inner layers never import outer layers. Infrastructure implements application ports.
+
+## Documentation
+
+- [Technical Challenge](./TECHNICAL_TEST.md) - Original test requirements
+
+## License
+
+This project is provided for educational and evaluation purposes.
