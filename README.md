@@ -35,6 +35,25 @@ flutter pub get
 flutter run
 ```
 
+### Firebase Configuration
+
+This project uses Firebase for analytics. To run the app locally, you need to configure Firebase:
+
+1. **Create your `.env` file** at the project root (see `.env.example` for required variables)
+
+2. **Download `google-services.json`** from [Firebase Console](https://console.firebase.google.com/) and place it in `android/app/`
+
+3. **For iOS** (optional): Download `GoogleService-Info.plist` and place it in `ios/Runner/`
+
+#### CI/CD Configuration
+
+For GitHub Actions, add these secrets to your repository (Settings → Secrets → Actions):
+
+| Secret                        | How to generate                                                                                                |
+|-------------------------------|----------------------------------------------------------------------------------------------------------------|
+| `DOTENV_BASE64`               | `base64 -i .env` (macOS) or `base64 -w 0 .env` (Linux)                                                         |
+| `GOOGLE_SERVICES_JSON_BASE64` | `base64 -i android/app/google-services.json` (macOS) or `base64 -w 0 android/app/google-services.json` (Linux) |
+
 ## Commands
 
 | Command             | Description                      |
