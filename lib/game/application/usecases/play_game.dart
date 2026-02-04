@@ -19,7 +19,7 @@ class PlayGame {
     final updatedGame = game.playAt(x: command.x, y: command.y);
 
     await _gameRepository.save(updatedGame);
-    _analytics.send('player_played', {'x': command.x, 'y': command.y});
+    await _analytics.send('player_played', {'x': command.x, 'y': command.y});
     return updatedGame;
   }
 }

@@ -17,7 +17,7 @@ class PlayAgainGame {
 
     final newGame = await _startGame.execute(StartGameCommand(difficulty: game.difficulty));
     await _gameRepository.save(newGame);
-    _analytics.send('play_again', {'difficulty': game.difficulty.name});
+    await _analytics.send('play_again', {'difficulty': game.difficulty.name});
     return newGame;
   }
 }

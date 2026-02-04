@@ -4,5 +4,5 @@ class NoAnalytics implements Analytics {
   const NoAnalytics();
 
   @override
-  void send(String event, [Map<String, Object>? params]) {}
+  Future<void> send(String event, [Map<String, Object>? params]) async {}
 }

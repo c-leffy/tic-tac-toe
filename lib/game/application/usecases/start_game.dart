@@ -14,7 +14,7 @@ class StartGame {
   Future<Game> execute(StartGameCommand command) async {
     final game = PlayerTurnGame(board: Board.generate3x3(), difficulty: command.difficulty);
     await _gameRepository.save(game);
-    _analytics.send('game_started', {'difficulty': command.difficulty.name});
+    await _analytics.send('game_started', {'difficulty': command.difficulty.name});
     return game;
   }
 }

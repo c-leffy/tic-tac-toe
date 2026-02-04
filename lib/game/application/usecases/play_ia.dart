@@ -22,7 +22,7 @@ class PlayIa {
     final updatedGame = game.playAt(x: cell.x, y: cell.y);
 
     await _gameRepository.save(updatedGame);
-    _analytics.send('ia_played', {'x': cell.x, 'y': cell.y});
+    await _analytics.send('ia_played', {'x': cell.x, 'y': cell.y});
     return updatedGame;
   }
 }
