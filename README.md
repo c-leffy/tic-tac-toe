@@ -1,6 +1,7 @@
 <div align="center">
   <img src="assets/icon/icon.png" alt="Tic Tac Toe" width="200">
   <h1>Tic-Tac-Toe</h1>
+  <img src="demo.gif" alt="Demo" width="300">
 </div>
 
 A Flutter implementation of the classic Tic-Tac-Toe game featuring Human vs CPU gameplay, built with Clean Architecture principles.
