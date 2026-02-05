@@ -14,8 +14,6 @@ class HomeNotifier extends Notifier<HomeState> {
     await ref.read(startGameUseCaseProvider).execute(StartGameCommand(difficulty: difficulty));
     state = HomeState.gameStarted;
   }
-
-  void reset() => state = HomeState.idle;
 }
 
 final homeNotifierProvider = NotifierProvider<HomeNotifier, HomeState>(HomeNotifier.new);

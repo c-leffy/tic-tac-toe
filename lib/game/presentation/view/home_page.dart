@@ -15,7 +15,6 @@ class HomePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(homeNotifierProvider, (_, state) {
       if (state == HomeState.gameStarted) {
-        ref.read(homeNotifierProvider.notifier).reset();
         context.go('/game');
       }
     });
@@ -32,7 +31,10 @@ class HomePage extends ConsumerWidget {
                 mainAxisSize: MainAxisSize.min,
                 spacing: Size.large,
                 children: [
-                  ConstrainedBox(constraints: const BoxConstraints(maxWidth: 400), child: Image.asset('assets/home.png')),
+                  ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 400),
+                    child: Image.asset('assets/home.png'),
+                  ),
                   isLoading
                       ? const CircularProgressIndicator()
                       : NeoButton.text(label: context.l10n.play, onPressed: () => _onPlayPressed(context, ref)),
