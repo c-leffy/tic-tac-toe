@@ -4,9 +4,9 @@ import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/cell_view_model.dart';
 
 class BoardViewModel extends Equatable {
-  final List<List<CellViewModel>> rows;
+  final List<CellViewModel> cells;
 
-  const BoardViewModel._(this.rows);
+  const BoardViewModel._(this.cells);
 
   /// Maps domain coordinates to display order.
   ///
@@ -20,15 +20,15 @@ class BoardViewModel extends Equatable {
   ///       0 1 2  x
   /// ```
   ///
-  /// Flutter renders top-to-bottom, so rows[0] appears at the top.
-  /// We sort by y descending to display y=2 first (at the top of the screen).
+  /// Flutter renders top-to-bottom, so we sort by y descending
+  /// to display y=2 first (at the top of the screen).
   factory BoardViewModel.from(Board board) => BoardViewModel._(
     board.rows
         .sortedByDescending((row) => row.first.y)
-        .map((row) => row.map(CellViewModel.from).toList())
+        .expand((row) => row.map(CellViewModel.from))
         .toList(),
   );
 
   @override
-  List<Object?> get props => [rows];
+  List<Object?> get props => [cells];
 }

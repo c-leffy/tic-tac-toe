@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tic_tac_toe/core/presentation/widgets/neo_card.dart';
 import 'package:tic_tac_toe/core/style/size.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/board_view_model.dart';
-import 'package:tic_tac_toe/game/presentation/widgets/board/board_row.dart';
+import 'package:tic_tac_toe/game/presentation/widgets/cell/cell_widget.dart';
 
 class GameBoard extends StatelessWidget {
   final BoardViewModel board;
@@ -18,13 +18,25 @@ class GameBoard extends StatelessWidget {
       final boardSize = constraints.maxWidth.clamp(0.0, _maxBoardSize);
       final cellSize = (boardSize - Size.small * 2 - Size.medium * 2) / 3;
 
-      return NeoCard(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          spacing: Size.small,
-          children: board.rows
-              .map((row) => BoardRow(cells: row, cellSize: cellSize, onCellTap: isPlayerTurn ? onCellTap : null))
-              .toList(),
+      return Padding(
+        padding: const EdgeInsets.symmetric(horizontal: Size.small),
+        child: NeoCard(
+          child: GridView.count(
+            crossAxisCount: 3,
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            mainAxisSpacing: Size.small,
+            crossAxisSpacing: Size.small,
+            children: board.cells
+                .map(
+                  (cell) => CellWidget(
+                    cell: cell,
+                    size: cellSize,
+                    onTap: isPlayerTurn ? () => onCellTap?.call(cell.x, cell.y) : null,
+                  ),
+                )
+                .toList(),
+          ),
         ),
       );
     },

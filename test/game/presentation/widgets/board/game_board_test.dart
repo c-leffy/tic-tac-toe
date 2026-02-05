@@ -3,7 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/domain/model/symbol.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/board_view_model.dart';
-import 'package:tic_tac_toe/game/presentation/widgets/board/board_row.dart';
 import 'package:tic_tac_toe/game/presentation/widgets/board/game_board.dart';
 import 'package:tic_tac_toe/game/presentation/widgets/cell/cell_widget.dart';
 
@@ -36,14 +35,6 @@ void main() {
 
     // then
     expect(find.byType(CellWidget), findsNWidgets(9));
-  });
-
-  testWidgets('Should have 3 rows', (tester) async {
-    // given
-    await tester.pumpWidget(createWidget(board: emptyBoard));
-
-    // then
-    expect(find.byType(BoardRow), findsNWidgets(3));
   });
 
   testWidgets('Should display an empty board when all cells are empty', (tester) async {
