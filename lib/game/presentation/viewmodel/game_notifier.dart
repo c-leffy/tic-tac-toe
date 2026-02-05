@@ -1,53 +1,61 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:tic_tac_toe/game/application/ports/game_repository.dart';
+import 'package:tic_tac_toe/game/application/usecases/play_again.dart';
 import 'package:tic_tac_toe/game/application/usecases/play_game.dart';
+import 'package:tic_tac_toe/game/application/usecases/play_ia.dart';
 import 'package:tic_tac_toe/game/domain/exception/no_game_started_exception.dart';
 import 'package:tic_tac_toe/game/infrastructure/configuration/game_configuration.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/game_screen_state.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/game_state_mapper.dart';
+import 'package:tic_tac_toe/logs/application/ports/logs.dart';
 import 'package:tic_tac_toe/logs/infrastructure/configuration/logs_configuration.dart';
 
 class GameNotifier extends AsyncNotifier<GameScreenState> {
+  GameRepository get _gameRepository => ref.read(gameRepositoryProvider);
+
+  PlayAgainGame get _playAgainUseCase => ref.read(playAgainUseCaseProvider);
+
+  PlayGame get _playUseCase => ref.read(playGameUseCaseProvider);
+
+  PlayIa get _playIaUseCase => ref.read(playIaUseCaseProvider);
+
+  Logs get _logs => ref.read(logsProvider);
+
   @override
   Future<GameScreenState> build() async {
-    final repo = ref.read(gameRepositoryProvider);
-    final game = await repo.currentGame();
+    final game = await _gameRepository.currentGame();
     if (game == null) throw NoGameStartedException();
     return game.toState();
   }
 
   Future<void> playAgain() async {
     state = const AsyncValue.loading();
-    final playAgain = ref.read(playAgainUseCaseProvider);
     state = await AsyncValue.guard(() async {
-      final game = await playAgain.execute();
+      final game = await _playAgainUseCase.execute();
       return game.toState();
     });
   }
 
   Future<void> play(int x, int y) async {
-    final playGame = ref.read(playGameUseCaseProvider);
-
     try {
-      final game = await playGame.execute(PlayGameCommand(x: x, y: y));
+      final game = await _playUseCase.execute(PlayGameCommand(x: x, y: y));
       state = AsyncValue.data(game.toState());
 
       if (state.value is IaTurnScreenState) {
         await _playIa();
       }
     } catch (e) {
-      ref.read(logsProvider).e("Error playing: $e");
+      _logs.e("Error playing: $e");
     }
   }
 
   Future<void> _playIa() async {
     await Future.delayed(ref.read(iaDelayProvider));
-    final playIa = ref.read(playIaUseCaseProvider);
-
     try {
-      final game = await playIa.execute();
+      final game = await _playIaUseCase.execute();
       state = AsyncValue.data(game.toState());
     } catch (e) {
-      ref.read(logsProvider).e("Error playing IA: $e");
+      _logs.e("Error playing IA: $e");
     }
   }
 }
