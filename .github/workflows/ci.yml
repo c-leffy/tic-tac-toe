@@ -26,9 +26,14 @@ jobs:
           flutter-version: '3.38.7'
           channel: 'stable'
 
-      - run: flutter pub get
+      - name: Install Melos
+        run: dart pub global activate melos
 
-      - run: flutter analyze
+      - name: Bootstrap Melos
+        run: melos bootstrap
+
+      - name: Analyze
+        run: flutter analyze
 
   test:
     name: Test
@@ -47,9 +52,14 @@ jobs:
           flutter-version: '3.38.7'
           channel: 'stable'
 
-      - run: flutter pub get
+      - name: Install Melos
+        run: dart pub global activate melos
 
-      - run: flutter test
+      - name: Bootstrap Melos
+        run: melos bootstrap
+
+      - name: Run tests
+        run: melos run test
 
   build:
     name: Build APK
@@ -79,9 +89,14 @@ jobs:
           flutter-version: '3.38.7'
           channel: 'stable'
 
-      - run: flutter pub get
+      - name: Install Melos
+        run: dart pub global activate melos
 
-      - run: flutter build apk --release
+      - name: Bootstrap Melos
+        run: melos bootstrap
+
+      - name: Build APK
+        run: flutter build apk --release
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
