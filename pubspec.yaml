@@ -12,6 +12,7 @@ workspace:
   - packages/analytics
   - packages/logs
   - packages/core
+  - packages/game
 
 melos:
   scripts:
@@ -42,6 +43,7 @@ dependencies:
   analytics: any
   logs: any
   core: any
+  game: any
 
 dev_dependencies:
   flutter_test:

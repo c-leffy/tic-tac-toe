@@ -1,6 +1,5 @@
 import 'package:go_router/go_router.dart';
-import 'package:tic_tac_toe/game/presentation/view/game_page.dart';
-import 'package:tic_tac_toe/game/presentation/view/home_page.dart';
+import 'package:game/game.dart';
 
 final router = GoRouter(
   routes: [

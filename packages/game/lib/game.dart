@@ -1,0 +1,65 @@
+// L10n
+export 'l10n/game_l10n.dart';
+
+// Domain - Models
+export 'domain/model/board.dart';
+export 'domain/model/cell.dart';
+export 'domain/model/difficulty.dart';
+export 'domain/model/game.dart';
+export 'domain/model/symbol.dart';
+export 'domain/model/winning_condition.dart';
+export 'domain/model/state/draw_game.dart';
+export 'domain/model/state/ia_turn_game.dart';
+export 'domain/model/state/ia_won_game.dart';
+export 'domain/model/state/player_turn_game.dart';
+export 'domain/model/state/player_won_game.dart';
+
+// Domain - Exceptions
+export 'domain/exception/cell_not_available_exception.dart';
+export 'domain/exception/game_over_exception.dart';
+export 'domain/exception/no_game_started_exception.dart';
+export 'domain/exception/not_ia_turn_exception.dart';
+export 'domain/exception/not_player_turn_exception.dart';
+
+// Domain - Strategies
+export 'domain/strategy/ia_strategy.dart';
+export 'domain/strategy/blocking_strategy.dart';
+export 'domain/strategy/minimax_strategy.dart';
+export 'domain/strategy/random_strategy.dart';
+
+// Application - Ports
+export 'application/ports/game_repository.dart';
+
+// Application - Use Cases
+export 'application/usecases/play_again.dart';
+export 'application/usecases/play_game.dart';
+export 'application/usecases/play_ia.dart';
+export 'application/usecases/start_game.dart';
+
+// Infrastructure - Configuration
+export 'infrastructure/configuration/game_configuration.dart';
+
+// Infrastructure - Persistence
+export 'infrastructure/persistence/inmemory/in_memory_game_repository.dart';
+
+// Presentation - Views
+export 'presentation/view/game_page.dart';
+export 'presentation/view/home_page.dart';
+
+// Presentation - ViewModels
+export 'presentation/viewmodel/board_view_model.dart';
+export 'presentation/viewmodel/cell_view_model.dart';
+export 'presentation/viewmodel/difficulty_view_model.dart';
+export 'presentation/viewmodel/game_notifier.dart';
+export 'presentation/viewmodel/game_screen_state.dart';
+export 'presentation/viewmodel/game_state_mapper.dart';
+export 'presentation/viewmodel/game_status_view_model.dart';
+export 'presentation/viewmodel/home_notifier.dart';
+export 'presentation/viewmodel/symbol_view_model.dart';
+
+// Presentation - Widgets
+export 'presentation/widgets/board/game_board.dart';
+export 'presentation/widgets/cell/cell_widget.dart';
+export 'presentation/widgets/cell/symbol_icon.dart';
+export 'presentation/widgets/game/difficulty_dialog.dart';
+export 'presentation/widgets/game/game_status_bar.dart';

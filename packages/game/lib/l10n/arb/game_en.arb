@@ -1,0 +1,14 @@
+{
+  "@@locale": "en",
+  "play": "Play",
+  "playAgain": "Play again",
+  "chooseDifficulty": "Choose difficulty",
+  "difficultyEasy": "Easy",
+  "difficultyMedium": "Medium",
+  "difficultyHard": "Hard",
+  "statusPlayerTurn": "Your turn",
+  "statusIaThinking": "AI is thinking...",
+  "statusVictory": "Victory!",
+  "statusDefeat": "Defeat!",
+  "statusDraw": "Draw!"
+}

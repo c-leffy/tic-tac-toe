@@ -1,0 +1,14 @@
+{
+  "@@locale": "fr",
+  "play": "Jouer",
+  "playAgain": "Rejouer",
+  "chooseDifficulty": "Choisir la difficulté",
+  "difficultyEasy": "Facile",
+  "difficultyMedium": "Moyen",
+  "difficultyHard": "Difficile",
+  "statusPlayerTurn": "À vous de jouer",
+  "statusIaThinking": "L'IA réfléchit...",
+  "statusVictory": "Victoire !",
+  "statusDefeat": "Défaite !",
+  "statusDraw": "Match nul !"
+}
