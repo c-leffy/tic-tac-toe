@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/core/style/size.dart';
-import 'package:tic_tac_toe/core/style/theme.dart';
+import 'package:core/core.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/cell_view_model.dart';
 import 'package:tic_tac_toe/game/presentation/widgets/cell/symbol_icon.dart';
 

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/core/presentation/widgets/neo_card.dart';
-import 'package:tic_tac_toe/core/style/size.dart';
+import 'package:core/core.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/board_view_model.dart';
 import 'package:tic_tac_toe/game/presentation/widgets/cell/cell_widget.dart';
 

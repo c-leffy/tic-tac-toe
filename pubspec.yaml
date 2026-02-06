@@ -11,6 +11,7 @@ environment:
 workspace:
   - packages/analytics
   - packages/logs
+  - packages/core
 
 melos:
   scripts:
@@ -40,6 +41,7 @@ dependencies:
   flutter_dotenv: ^5.2.1
   analytics: any
   logs: any
+  core: any
 
 dev_dependencies:
   flutter_test:

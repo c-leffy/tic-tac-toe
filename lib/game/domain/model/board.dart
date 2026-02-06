@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tic_tac_toe/core/collections/group_by.dart';
+import 'package:core/core.dart';
 import 'package:tic_tac_toe/game/domain/exception/cell_not_available_exception.dart';
 import 'package:tic_tac_toe/game/domain/model/cell.dart';
 import 'package:tic_tac_toe/game/domain/model/symbol.dart';

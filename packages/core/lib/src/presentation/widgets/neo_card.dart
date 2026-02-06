@@ -1,7 +1,7 @@
+import 'package:core/src/style/shadow_offset.dart';
+import 'package:core/src/style/size.dart';
+import 'package:core/src/style/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/core/style/shadow_offset.dart';
-import 'package:tic_tac_toe/core/style/size.dart';
-import 'package:tic_tac_toe/core/style/theme.dart';
 
 class NeoCard extends StatelessWidget {
   final Widget child;
@@ -22,7 +22,13 @@ class NeoCard extends StatelessWidget {
       color: backgroundColor,
       border: Border.all(color: AppColors.border, width: Size.tiny),
       borderRadius: BorderRadius.circular(Size.small),
-      boxShadow: [BoxShadow(color: AppColors.shadow, offset: ShadowOffset.offset, blurRadius: 0)],
+      boxShadow: [
+        BoxShadow(
+          color: AppColors.shadow,
+          offset: ShadowOffset.offset,
+          blurRadius: 0,
+        ),
+      ],
     ),
     child: child,
   );

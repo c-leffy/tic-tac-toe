@@ -1,5 +1,5 @@
+import 'package:core/src/style/size.dart';
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/core/style/size.dart';
 
 abstract final class AppColors {
   static const background = Color(0xFFFEFBF7);
@@ -23,8 +23,16 @@ final appTheme = ThemeData(
     onSurface: Colors.black,
   ),
   textTheme: const TextTheme(
-    headlineSmall: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.text),
-    bodyLarge: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: AppColors.text),
+    headlineSmall: TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: AppColors.text,
+    ),
+    bodyLarge: TextStyle(
+      fontSize: 18,
+      fontWeight: FontWeight.w600,
+      color: AppColors.text,
+    ),
   ),
   dialogTheme: DialogThemeData(
     backgroundColor: AppColors.surface,
@@ -32,6 +40,10 @@ final appTheme = ThemeData(
       borderRadius: BorderRadius.circular(Size.small),
       side: const BorderSide(color: AppColors.border, width: Size.tiny),
     ),
-    titleTextStyle: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: AppColors.text),
+    titleTextStyle: const TextStyle(
+      fontSize: 24,
+      fontWeight: FontWeight.bold,
+      color: AppColors.text,
+    ),
   ),
 );

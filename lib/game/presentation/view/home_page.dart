@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tic_tac_toe/core/l10n/core_l10n.dart';
-import 'package:tic_tac_toe/core/presentation/widgets/neo_button.dart';
-import 'package:tic_tac_toe/core/style/size.dart';
+import 'package:core/core.dart';
+import 'package:tic_tac_toe/l10n/l10n_extensions.dart';
 import 'package:tic_tac_toe/game/presentation/l10n/game_l10n.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/home_notifier.dart';
 import 'package:tic_tac_toe/game/presentation/widgets/game/difficulty_dialog.dart';

@@ -1,7 +1,7 @@
+import 'package:core/src/style/shadow_offset.dart';
+import 'package:core/src/style/size.dart';
+import 'package:core/src/style/theme.dart';
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/core/style/shadow_offset.dart';
-import 'package:tic_tac_toe/core/style/size.dart';
-import 'package:tic_tac_toe/core/style/theme.dart';
 
 class NeoButton extends StatefulWidget {
   final Widget child;
@@ -15,7 +15,10 @@ class NeoButton extends StatefulWidget {
     required this.child,
     this.onPressed,
     this.backgroundColor = AppColors.primary,
-    this.padding = const EdgeInsets.symmetric(horizontal: Size.large, vertical: Size.medium),
+    this.padding = const EdgeInsets.symmetric(
+      horizontal: Size.large,
+      vertical: Size.medium,
+    ),
     this.width,
   });
 
@@ -34,7 +37,11 @@ class NeoButton extends StatefulWidget {
     child: Text(
       label,
       textAlign: TextAlign.center,
-      style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: textColor),
+      style: TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.bold,
+        color: textColor,
+      ),
     ),
   );
 
@@ -83,14 +90,24 @@ class _NeoButtonState extends State<NeoButton> {
       onTapCancel: widget.onPressed != null ? _onTapCancel : null,
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 100),
-        transform: Matrix4.translationValues(_isPressed ? ShadowOffset.x : 0, _isPressed ? ShadowOffset.y : 0, 0),
+        transform: Matrix4.translationValues(
+          _isPressed ? ShadowOffset.x : 0,
+          _isPressed ? ShadowOffset.y : 0,
+          0,
+        ),
         decoration: BoxDecoration(
           color: widget.backgroundColor,
           border: Border.all(color: AppColors.border, width: Size.tiny),
           borderRadius: BorderRadius.circular(Size.small),
-          boxShadow: [BoxShadow(color: AppColors.shadow, offset: offset, blurRadius: 0)],
+          boxShadow: [
+            BoxShadow(color: AppColors.shadow, offset: offset, blurRadius: 0),
+          ],
         ),
-        child: Container(width: widget.width, padding: widget.padding, child: widget.child),
+        child: Container(
+          width: widget.width,
+          padding: widget.padding,
+          child: widget.child,
+        ),
       ),
     );
   }

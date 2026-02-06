@@ -1,5 +1,5 @@
 import 'package:equatable/equatable.dart';
-import 'package:tic_tac_toe/core/collections/sorted_by.dart';
+import 'package:core/core.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/cell_view_model.dart';
 

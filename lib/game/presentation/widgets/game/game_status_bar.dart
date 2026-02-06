@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe/core/l10n/core_l10n.dart';
-import 'package:tic_tac_toe/core/style/size.dart';
-import 'package:tic_tac_toe/core/style/theme.dart';
+import 'package:core/core.dart';
+import 'package:tic_tac_toe/l10n/l10n_extensions.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/game_status_view_model.dart';
 
 class GameStatusBar extends StatelessWidget {
