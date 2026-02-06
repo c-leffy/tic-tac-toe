@@ -20,6 +20,7 @@ Challenge the AI in this classic game! Choose your difficulty level and try to b
 ### Prerequisites
 
 - [Flutter SDK](https://docs.flutter.dev/get-started/install) (3.0+)
+- [Melos](https://melos.invertase.dev/) (optional, for package management)
 
 ### Installation
 
@@ -28,8 +29,8 @@ Challenge the AI in this classic game! Choose your difficulty level and try to b
 git clone https://github.com/c-leffy/tic-tac-toe.git
 cd tic-tac-toe
 
-# Install dependencies
-flutter pub get
+# Bootstrap the workspace (installs all dependencies)
+dart run melos bootstrap
 
 # Run the app
 flutter run
@@ -54,15 +55,40 @@ For GitHub Actions, add these secrets to your repository (Settings → Secrets �
 | `DOTENV_BASE64`               | `base64 -i .env` (macOS) or `base64 -w 0 .env` (Linux)                                                         |
 | `GOOGLE_SERVICES_JSON_BASE64` | `base64 -i android/app/google-services.json` (macOS) or `base64 -w 0 android/app/google-services.json` (Linux) |
 
+## Project Structure
+
+This project uses a **Melos monorepo** architecture with multiple packages:
+
+```
+tic_tac_toe/
+├── lib/                    # Main app (entry point, routing)
+├── packages/
+│   ├── analytics/          # Firebase Analytics abstraction
+│   ├── core/               # Shared UI components, theme, utilities
+│   ├── game/               # Game logic, UI, and tests
+│   └── logs/               # Logging abstraction
+└── pubspec.yaml            # Workspace configuration
+```
+
 ## Commands
 
-| Command             | Description                      |
-|---------------------|----------------------------------|
-| `flutter pub get`   | Install dependencies             |
-| `flutter run`       | Run on connected device/emulator |
-| `flutter test`      | Run all tests                    |
-| `flutter analyze`   | Run static analysis              |
-| `flutter build web` | Build for web deployment         |
+| Command                      | Description                           |
+|------------------------------|---------------------------------------|
+| `dart run melos bootstrap`   | Install dependencies for all packages |
+| `dart run melos run analyze` | Run static analysis on all packages   |
+| `dart run melos run test`    | Run tests in all packages             |
+| `dart run melos run clean`   | Clean all packages                    |
+
+### Package-specific Commands
+
+```bash
+# Run tests for game module only
+cd packages/game && flutter test
+
+# Generate localizations for a module
+cd packages/game && flutter gen-l10n
+cd packages/core && flutter gen-l10n
+```
 
 ## Architecture
 
