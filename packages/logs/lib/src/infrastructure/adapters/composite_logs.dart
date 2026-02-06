@@ -1,4 +1,4 @@
-import 'package:tic_tac_toe/logs/application/ports/logs.dart';
+import 'package:logs/src/application/ports/logs.dart';
 
 class CompositeLogs implements Logs {
   final List<Logs> _loggers;

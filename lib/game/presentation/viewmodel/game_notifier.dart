@@ -7,8 +7,7 @@ import 'package:tic_tac_toe/game/domain/exception/no_game_started_exception.dart
 import 'package:tic_tac_toe/game/infrastructure/configuration/game_configuration.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/game_screen_state.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/game_state_mapper.dart';
-import 'package:tic_tac_toe/logs/application/ports/logs.dart';
-import 'package:tic_tac_toe/logs/infrastructure/configuration/logs_configuration.dart';
+import 'package:logs/logs.dart';
 
 class GameNotifier extends AsyncNotifier<GameScreenState> {
   GameRepository get _gameRepository => ref.read(gameRepositoryProvider);

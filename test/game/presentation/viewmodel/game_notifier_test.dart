@@ -1,7 +1,8 @@
+import 'package:analytics/analytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:logs/logs.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
-import 'package:analytics/analytics.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/domain/model/cell.dart';
 import 'package:tic_tac_toe/game/domain/model/difficulty.dart';
@@ -21,6 +22,7 @@ void main() {
         gameRepositoryProvider.overrideWithValue(repository),
         iaDelayProvider.overrideWithValue(Duration.zero),
         analyticsProvider.overrideWithValue(const NoAnalytics()),
+        logsProvider.overrideWithValue(const NoLogs()),
       ],
     );
     if (listen) container.listen(gameNotifierProvider, (_, _) {});

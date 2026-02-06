@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:tic_tac_toe/logs/application/ports/logs.dart';
+import 'package:logs/src/application/ports/logs.dart';
 
 class ConsoleLogs implements Logs {
   @override

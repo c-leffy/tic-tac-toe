@@ -1,5 +1,7 @@
-import 'package:tic_tac_toe/logs/application/ports/logs.dart';
+import 'package:logs/src/application/ports/logs.dart';
 
+/// A no-op implementation of [Logs] for testing or when logging
+/// should be disabled.
 class NoLogs implements Logs {
   const NoLogs();
 
