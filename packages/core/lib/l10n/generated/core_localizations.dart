@@ -5,24 +5,24 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
-import 'app_localizations_en.dart';
-import 'app_localizations_fr.dart';
+import 'core_localizations_en.dart';
+import 'core_localizations_fr.dart';
 
 // ignore_for_file: type=lint
 
-/// Callers can lookup localized strings with an instance of AppLocalizations
-/// returned by `AppLocalizations.of(context)`.
+/// Callers can lookup localized strings with an instance of CoreLocalizations
+/// returned by `CoreLocalizations.of(context)`.
 ///
-/// Applications need to include `AppLocalizations.delegate()` in their app's
+/// Applications need to include `CoreLocalizations.delegate()` in their app's
 /// `localizationDelegates` list, and the locales they support in the app's
 /// `supportedLocales` list. For example:
 ///
 /// ```dart
-/// import 'generated/app_localizations.dart';
+/// import 'generated/core_localizations.dart';
 ///
 /// return MaterialApp(
-///   localizationsDelegates: AppLocalizations.localizationsDelegates,
-///   supportedLocales: AppLocalizations.supportedLocales,
+///   localizationsDelegates: CoreLocalizations.localizationsDelegates,
+///   supportedLocales: CoreLocalizations.supportedLocales,
 ///   home: MyApplicationHome(),
 /// );
 /// ```
@@ -59,20 +59,20 @@ import 'app_localizations_fr.dart';
 /// Select and expand the newly-created Localizations item then, for each
 /// locale your application supports, add a new item and select the locale
 /// you wish to add from the pop-up menu in the Value field. This list should
-/// be consistent with the languages listed in the AppLocalizations.supportedLocales
+/// be consistent with the languages listed in the CoreLocalizations.supportedLocales
 /// property.
-abstract class AppLocalizations {
-  AppLocalizations(String locale)
+abstract class CoreLocalizations {
+  CoreLocalizations(String locale)
     : localeName = intl.Intl.canonicalizedLocale(locale.toString());
 
   final String localeName;
 
-  static AppLocalizations? of(BuildContext context) {
-    return Localizations.of<AppLocalizations>(context, AppLocalizations);
+  static CoreLocalizations? of(BuildContext context) {
+    return Localizations.of<CoreLocalizations>(context, CoreLocalizations);
   }
 
-  static const LocalizationsDelegate<AppLocalizations> delegate =
-      _AppLocalizationsDelegate();
+  static const LocalizationsDelegate<CoreLocalizations> delegate =
+      _CoreLocalizationsDelegate();
 
   /// A list of this localizations delegate along with the default localizations
   /// delegates.
@@ -98,98 +98,34 @@ abstract class AppLocalizations {
     Locale('fr'),
   ];
 
-  /// No description provided for @coreAppTitle.
+  /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
   /// **'Tic Tac Toe'**
-  String get coreAppTitle;
+  String get appTitle;
 
-  /// No description provided for @coreError.
+  /// No description provided for @error.
   ///
   /// In en, this message translates to:
   /// **'Error: {message}'**
-  String coreError(String message);
+  String error(String message);
 
-  /// No description provided for @coreBackToHome.
+  /// No description provided for @backToHome.
   ///
   /// In en, this message translates to:
   /// **'Back to home'**
-  String get coreBackToHome;
-
-  /// No description provided for @gamePlay.
-  ///
-  /// In en, this message translates to:
-  /// **'Play'**
-  String get gamePlay;
-
-  /// No description provided for @gamePlayAgain.
-  ///
-  /// In en, this message translates to:
-  /// **'Play again'**
-  String get gamePlayAgain;
-
-  /// No description provided for @gameChooseDifficulty.
-  ///
-  /// In en, this message translates to:
-  /// **'Choose difficulty'**
-  String get gameChooseDifficulty;
-
-  /// No description provided for @gameDifficultyEasy.
-  ///
-  /// In en, this message translates to:
-  /// **'Easy'**
-  String get gameDifficultyEasy;
-
-  /// No description provided for @gameDifficultyMedium.
-  ///
-  /// In en, this message translates to:
-  /// **'Medium'**
-  String get gameDifficultyMedium;
-
-  /// No description provided for @gameDifficultyHard.
-  ///
-  /// In en, this message translates to:
-  /// **'Hard'**
-  String get gameDifficultyHard;
-
-  /// No description provided for @gameStatusPlayerTurn.
-  ///
-  /// In en, this message translates to:
-  /// **'Your turn'**
-  String get gameStatusPlayerTurn;
-
-  /// No description provided for @gameStatusIaThinking.
-  ///
-  /// In en, this message translates to:
-  /// **'AI is thinking...'**
-  String get gameStatusIaThinking;
-
-  /// No description provided for @gameStatusVictory.
-  ///
-  /// In en, this message translates to:
-  /// **'Victory!'**
-  String get gameStatusVictory;
-
-  /// No description provided for @gameStatusDefeat.
-  ///
-  /// In en, this message translates to:
-  /// **'Defeat!'**
-  String get gameStatusDefeat;
-
-  /// No description provided for @gameStatusDraw.
-  ///
-  /// In en, this message translates to:
-  /// **'Draw!'**
-  String get gameStatusDraw;
+  String get backToHome;
 }
 
-class _AppLocalizationsDelegate
-    extends LocalizationsDelegate<AppLocalizations> {
-  const _AppLocalizationsDelegate();
+class _CoreLocalizationsDelegate
+    extends LocalizationsDelegate<CoreLocalizations> {
+  const _CoreLocalizationsDelegate();
 
   @override
-  Future<AppLocalizations> load(Locale locale) {
-    return SynchronousFuture<AppLocalizations>(lookupAppLocalizations(locale));
+  Future<CoreLocalizations> load(Locale locale) {
+    return SynchronousFuture<CoreLocalizations>(
+      lookupCoreLocalizations(locale),
+    );
   }
 
   @override
@@ -197,20 +133,20 @@ class _AppLocalizationsDelegate
       <String>['en', 'fr'].contains(locale.languageCode);
 
   @override
-  bool shouldReload(_AppLocalizationsDelegate old) => false;
+  bool shouldReload(_CoreLocalizationsDelegate old) => false;
 }
 
-AppLocalizations lookupAppLocalizations(Locale locale) {
+CoreLocalizations lookupCoreLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en':
-      return AppLocalizationsEn();
+      return CoreLocalizationsEn();
     case 'fr':
-      return AppLocalizationsFr();
+      return CoreLocalizationsFr();
   }
 
   throw FlutterError(
-    'AppLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
+    'CoreLocalizations.delegate failed to load unsupported locale "$locale". This is likely '
     'an issue with the localizations generation tool. Please file an issue '
     'on GitHub with a reproducible sample app and the gen-l10n configuration '
     'that was used.',

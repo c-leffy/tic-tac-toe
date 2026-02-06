@@ -1,0 +1,11 @@
+{
+  "@@locale": "en",
+  "appTitle": "Tic Tac Toe",
+  "error": "Error: {message}",
+  "@error": {
+    "placeholders": {
+      "message": { "type": "String" }
+    }
+  },
+  "backToHome": "Back to home"
+}

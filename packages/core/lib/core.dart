@@ -11,3 +11,6 @@ export 'src/style/theme.dart';
 // Widgets
 export 'src/presentation/widgets/neo_button.dart';
 export 'src/presentation/widgets/neo_card.dart';
+
+// L10n
+export 'l10n/core_l10n.dart';

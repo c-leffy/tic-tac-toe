@@ -31,7 +31,7 @@ class HomePage extends ConsumerWidget {
                 children: [
                   ConstrainedBox(
                     constraints: const BoxConstraints(maxWidth: 400),
-                    child: Image.asset('assets/home.png'),
+                    child: Image.asset('assets/home.png', package: 'game'),
                   ),
                   isLoading
                       ? const CircularProgressIndicator()

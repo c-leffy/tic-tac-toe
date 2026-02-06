@@ -2,11 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:analytics/analytics.dart';
 import 'package:core/core.dart';
-import 'package:tic_tac_toe/l10n/l10n_extensions.dart';
-import 'package:tic_tac_toe/l10n/generated/app_localizations.dart';
+import 'package:game/game.dart';
 import 'package:tic_tac_toe/router.dart';
 
 Future<void> main() async {
@@ -23,11 +23,17 @@ class TicTacToeApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      onGenerateTitle: (context) => context.l10n.appTitle,
+      onGenerateTitle: (context) => context.coreL10n.appTitle,
       theme: appTheme,
       routerConfig: router,
-      localizationsDelegates: AppLocalizations.localizationsDelegates,
-      supportedLocales: AppLocalizations.supportedLocales,
+      localizationsDelegates: const [
+        CoreLocalizations.delegate,
+        GameLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: CoreLocalizations.supportedLocales,
     );
   }
 }

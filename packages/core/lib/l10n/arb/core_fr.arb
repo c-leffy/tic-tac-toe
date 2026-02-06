@@ -1,0 +1,6 @@
+{
+  "@@locale": "fr",
+  "appTitle": "Tic Tac Toe",
+  "error": "Erreur : {message}",
+  "backToHome": "Retour à l'accueil"
+}
