@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
-import 'package:tic_tac_toe/analytics/infrastructure/configuration/analytics_configuration.dart';
+import 'package:analytics/analytics.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/domain/model/cell.dart';
 import 'package:tic_tac_toe/game/domain/model/difficulty.dart';
@@ -11,7 +11,6 @@ import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_g
 import 'package:tic_tac_toe/game/presentation/viewmodel/game_notifier.dart';
 import 'package:tic_tac_toe/game/presentation/viewmodel/game_screen_state.dart';
 
-import '../../../analytics/fake/no_analytics.dart';
 import '../../builder/game_builder.dart';
 
 void main() {

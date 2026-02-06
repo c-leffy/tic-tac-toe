@@ -1,5 +1,5 @@
+import 'package:analytics/src/application/ports/analytics.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
-import 'package:tic_tac_toe/analytics/application/ports/analytics.dart';
 
 class FirebaseAnalyticsAdapter implements Analytics {
   @override

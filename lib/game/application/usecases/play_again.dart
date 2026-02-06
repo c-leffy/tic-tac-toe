@@ -1,4 +1,4 @@
-import 'package:tic_tac_toe/analytics/application/ports/analytics.dart';
+import 'package:analytics/analytics.dart';
 import 'package:tic_tac_toe/game/application/ports/game_repository.dart';
 import 'package:tic_tac_toe/game/application/usecases/start_game.dart';
 import 'package:tic_tac_toe/game/domain/exception/no_game_started_exception.dart';

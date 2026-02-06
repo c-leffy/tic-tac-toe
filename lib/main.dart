@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tic_tac_toe/analytics/infrastructure/adapters/firebase_options.dart';
+import 'package:analytics/analytics.dart';
 import 'package:tic_tac_toe/core/l10n/core_l10n.dart';
 import 'package:tic_tac_toe/core/style/theme.dart';
 import 'package:tic_tac_toe/l10n/generated/app_localizations.dart';

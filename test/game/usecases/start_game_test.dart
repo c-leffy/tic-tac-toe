@@ -5,7 +5,7 @@ import 'package:tic_tac_toe/game/application/usecases/start_game.dart';
 import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 
-import '../../analytics/fake/no_analytics.dart';
+import 'package:analytics/analytics.dart';
 import '../builder/game_builder.dart';
 
 StartGame createStartGame(GameRepository gameRepository) => StartGame(gameRepository, const NoAnalytics());

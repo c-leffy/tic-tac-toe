@@ -1,5 +1,5 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:tic_tac_toe/analytics/infrastructure/configuration/analytics_configuration.dart';
+import 'package:analytics/analytics.dart';
 import 'package:tic_tac_toe/game/application/ports/game_repository.dart';
 import 'package:tic_tac_toe/game/application/usecases/play_again.dart';
 import 'package:tic_tac_toe/game/application/usecases/play_game.dart';

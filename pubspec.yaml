@@ -8,6 +8,21 @@ environment:
   sdk: ^3.10.7
   flutter: ">=3.0.0"
 
+workspace:
+  - packages/analytics
+
+melos:
+  scripts:
+    analyze:
+      run: melos exec -- flutter analyze
+      description: Run flutter analyze in all packages
+    test:
+      run: melos exec -- flutter test
+      description: Run flutter test in all packages
+    clean:
+      run: melos exec -- flutter clean
+      description: Clean all packages
+
 dependencies:
   flutter:
     sdk: flutter
@@ -20,15 +35,16 @@ dependencies:
   equatable: ^2.0.8
   flutter_launcher_icons: ^0.14.4
   firebase_core: ^4.4.0
-  firebase_analytics: ^12.1.1
   firebase_crashlytics: ^5.0.7
   flutter_dotenv: ^5.2.1
+  analytics: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^6.0.0
   test: any
+  melos: ^7.4.0
 
 flutter:
   generate: true

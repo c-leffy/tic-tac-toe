@@ -10,7 +10,7 @@ import 'package:tic_tac_toe/game/domain/model/cell.dart';
 import 'package:tic_tac_toe/game/domain/model/state/ia_turn_game.dart';
 import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 
-import '../../analytics/fake/no_analytics.dart';
+import 'package:analytics/analytics.dart';
 import '../builder/game_builder.dart';
 
 PlayGame createPlayGame(GameRepository gameRepository) => PlayGame(gameRepository, const NoAnalytics());

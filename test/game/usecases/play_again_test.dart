@@ -7,7 +7,7 @@ import 'package:tic_tac_toe/game/domain/model/board.dart';
 import 'package:tic_tac_toe/game/domain/model/difficulty.dart';
 import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 
-import '../../analytics/fake/no_analytics.dart';
+import 'package:analytics/analytics.dart';
 import '../builder/game_builder.dart';
 
 PlayAgainGame createPlayAgain(GameRepository gameRepository) => PlayAgainGame(gameRepository, const NoAnalytics());

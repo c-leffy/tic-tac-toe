@@ -8,7 +8,7 @@ import 'package:tic_tac_toe/game/domain/model/state/player_turn_game.dart';
 import 'package:tic_tac_toe/game/domain/model/symbol.dart';
 import 'package:tic_tac_toe/game/infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 
-import '../../analytics/fake/no_analytics.dart';
+import 'package:analytics/analytics.dart';
 import '../builder/game_builder.dart';
 
 PlayIa createPlayIa(GameRepository gameRepository) => PlayIa(gameRepository, const NoAnalytics());
