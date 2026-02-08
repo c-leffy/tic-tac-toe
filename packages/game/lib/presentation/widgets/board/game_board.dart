@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:core/core.dart';
+import 'package:flutter/material.dart';
 import 'package:game/presentation/viewmodel/board_view_model.dart';
 import 'package:game/presentation/widgets/cell/cell_widget.dart';
 
@@ -20,6 +20,7 @@ class GameBoard extends StatelessWidget {
       return Padding(
         padding: const EdgeInsets.symmetric(horizontal: Size.small),
         child: NeoCard(
+          width: boardSize,
           child: GridView.count(
             crossAxisCount: 3,
             shrinkWrap: true,

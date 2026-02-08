@@ -1,8 +1,10 @@
 export 'l10n/core_l10n.dart';
 export 'src/collections/group_by.dart';
 export 'src/collections/sorted_by.dart';
+export 'src/presentation/widgets/neo_app_bar.dart';
 export 'src/presentation/widgets/neo_button.dart';
 export 'src/presentation/widgets/neo_card.dart';
+export 'src/presentation/widgets/scrollable_page.dart';
 export 'src/style/radius.dart';
 export 'src/style/shadow_offset.dart';
 export 'src/style/size.dart';
