@@ -1,15 +1,5 @@
-import 'package:go_router/go_router.dart';
 import 'package:game/game.dart';
+import 'package:go_router/go_router.dart';
+import 'package:login/login.dart';
 
-final router = GoRouter(
-  routes: [
-    GoRoute(
-      path: "/",
-      builder: (context, state) => const HomePage(),
-    ),
-    GoRoute(
-      path: "/game",
-      builder: (context, state) => const GamePage(),
-    ),
-  ],
-);
+final router = GoRouter(routes: [...gameRoutes, ...loginRoutes]);

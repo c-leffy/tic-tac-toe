@@ -1,19 +1,19 @@
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:go_router/go_router.dart';
-import 'package:core/core.dart';
 import 'package:game/game.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
   Widget createWidget({StartGame? startGameUseCase}) {
     final router = GoRouter(
-      initialLocation: '/',
+      initialLocation: GameRoutes.home.path,
       routes: [
-        GoRoute(path: '/', builder: (_, _) => const HomePage()),
+        GoRoute(path: GameRoutes.home.path, builder: (_, _) => const HomePage()),
         GoRoute(
-          path: '/game',
+          path: GameRoutes.game.path,
           builder: (_, _) => const Scaffold(body: Text('Game Page')),
         ),
       ],

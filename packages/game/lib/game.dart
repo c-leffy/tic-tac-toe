@@ -24,6 +24,7 @@ export 'domain/strategy/ia_strategy.dart';
 export 'domain/strategy/minimax_strategy.dart';
 export 'domain/strategy/random_strategy.dart';
 export 'infrastructure/configuration/game_configuration.dart';
+export 'infrastructure/configuration/game_router.dart';
 export 'infrastructure/persistence/inmemory/in_memory_game_repository.dart';
 export 'l10n/game_l10n.dart';
 export 'presentation/view/game_page.dart';
