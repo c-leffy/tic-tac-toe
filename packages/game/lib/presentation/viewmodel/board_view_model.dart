@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:core/core.dart';
+import 'package:equatable/equatable.dart';
 import 'package:game/domain/model/board.dart';
 import 'package:game/presentation/viewmodel/cell_view_model.dart';
 
@@ -23,11 +23,14 @@ class BoardViewModel extends Equatable {
   /// Flutter renders top-to-bottom, so we sort by y descending
   /// to display y=2 first (at the top of the screen).
   factory BoardViewModel.from(Board board) => BoardViewModel._(
-    board.rows
+    board
+        .rows //
         .sortedByDescending((row) => row.first.y)
         .expand((row) => row.map(CellViewModel.from))
         .toList(),
   );
+
+  factory BoardViewModel.empty() => BoardViewModel._([]);
 
   @override
   List<Object?> get props => [cells];

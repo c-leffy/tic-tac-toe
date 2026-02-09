@@ -1,36 +1,38 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:flutter_test/flutter_test.dart';
 import 'package:core/core.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_test/flutter_test.dart';
 import 'package:game/game.dart';
 
+import '../../viewmodel/stub_game_notifier.dart';
+
 void main() {
-  Widget createWidget(GameStatusViewModel status) => MaterialApp(
-    localizationsDelegates: const [
-      CoreLocalizations.delegate,
-      GameLocalizations.delegate,
-      GlobalMaterialLocalizations.delegate,
-      GlobalCupertinoLocalizations.delegate,
-      GlobalWidgetsLocalizations.delegate,
-    ],
-    supportedLocales: CoreLocalizations.supportedLocales,
-    locale: const Locale('en'),
-    home: Scaffold(body: GameStatusBar(status: status)),
+  Widget createWidget(GameScreenState state) => ProviderScope(
+    overrides: [gameNotifierProvider.overrideWith(() => StubGameNotifier(AsyncData(state)))],
+    child: MaterialApp(
+      localizationsDelegates: const [GameLocalizations.delegate],
+      supportedLocales: CoreLocalizations.supportedLocales,
+      locale: const Locale('en'),
+      home: Scaffold(body: GameStatusBar()),
+    ),
   );
 
+  final board = BoardViewModel.from(Board.generate3x3());
+
   final scenarios = [
-    (GameStatusViewModel.playerTurn, 'Your turn'),
-    (GameStatusViewModel.iaThinking, 'AI is thinking...'),
-    (GameStatusViewModel.victory, 'Victory!'),
-    (GameStatusViewModel.defeat, 'Defeat!'),
-    (GameStatusViewModel.draw, 'Draw!'),
+    (PlayerTurnScreenState(board), 'Your turn'),
+    (IaTurnScreenState(board), 'AI is thinking...'),
+    (VictoryScreenState(board), 'Victory!'),
+    (DefeatScreenState(board), 'Defeat!'),
+    (DrawScreenState(board), 'Draw!'),
   ];
 
-  for (final (status, expectedMessage) in scenarios) {
+  for (final (state, expectedMessage) in scenarios) {
+    final status = GameStatusViewModel.from(state);
     group("With ${status.name} status,", () {
       testWidgets("should display '$expectedMessage'", (tester) async {
         // given
-        await tester.pumpWidget(createWidget(status));
+        await tester.pumpWidget(createWidget(state));
         await tester.pumpAndSettle();
 
         // then
@@ -39,7 +41,7 @@ void main() {
 
       testWidgets("should have correct background color", (tester) async {
         // given
-        await tester.pumpWidget(createWidget(status));
+        await tester.pumpWidget(createWidget(state));
         await tester.pumpAndSettle();
 
         // when

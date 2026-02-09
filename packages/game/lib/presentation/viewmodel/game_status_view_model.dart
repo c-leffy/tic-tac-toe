@@ -21,11 +21,12 @@ enum GameStatusViewModel {
     draw => l10n.statusDraw,
   };
 
-  static GameStatusViewModel from(GameScreenState state) => switch (state) {
+  static GameStatusViewModel from(GameScreenState? state) => switch (state) {
     PlayerTurnScreenState() => playerTurn,
     IaTurnScreenState() => iaThinking,
     VictoryScreenState() => victory,
     DefeatScreenState() => defeat,
     DrawScreenState() => draw,
+    null => draw,
   };
 }

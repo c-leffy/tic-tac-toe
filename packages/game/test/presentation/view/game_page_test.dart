@@ -4,22 +4,22 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:game/game.dart';
 
-void main() {
-  final emptyBoard = BoardViewModel.from(Board.generate3x3());
+import '../viewmodel/stub_game_notifier.dart';
 
+void main() {
   Widget createWidget(AsyncValue<GameScreenState> state) => ProviderScope(
-    overrides: [gameNotifierProvider.overrideWith(() => _FakeGameNotifier(state))],
+    overrides: [gameNotifierProvider.overrideWith(() => StubGameNotifier(state))],
     child: MaterialApp(
       localizationsDelegates: const [CoreLocalizations.delegate, GameLocalizations.delegate],
       supportedLocales: CoreLocalizations.supportedLocales,
       locale: const Locale('en'),
-      home: const GamePage(),
+      home: GamePage(),
     ),
   );
 
   group('When game is in progress,', () {
     // given
-    final state = AsyncData(PlayerTurnScreenState(emptyBoard));
+    final state = AsyncData(PlayerTurnScreenState(BoardViewModel.empty()));
 
     testWidgets('Should display home button, status bar and board', (tester) async {
       // when
@@ -45,7 +45,7 @@ void main() {
 
   testWidgets('When game is over, should display the play again button', (tester) async {
     // given
-    final state = AsyncData(VictoryScreenState(emptyBoard));
+    final state = AsyncData(VictoryScreenState(BoardViewModel.empty()));
 
     // when
     await tester.pumpWidget(createWidget(state));
@@ -54,13 +54,4 @@ void main() {
     // then
     expect(find.text('Play again'), findsOneWidget);
   });
-}
-
-class _FakeGameNotifier extends GameNotifier {
-  final AsyncValue<GameScreenState> _state;
-
-  _FakeGameNotifier(this._state);
-
-  @override
-  Future<GameScreenState> build() async => _state.value!;
 }
