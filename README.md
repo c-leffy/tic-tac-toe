@@ -15,6 +15,13 @@ Challenge the AI in this classic game! Choose your difficulty level and try to b
 - **Medium** - Blocks your winning moves
 - **Difficult** - Unbeatable (Minimax algorithm)
 
+## Testing
+
+If you want to test the app (only for Android or web), you can :
+- Use Firebase App Distribution with this link : https://appdistribution.firebase.dev/i/0ae381bcdbc34883
+- Directly download the APK in the release section : https://github.com/c-leffy/tic-tac-toe/releases
+- In the browser: https://c-leffy.github.io/tic-tac-toe/
+
 ## Getting Started
 
 ### Prerequisites
