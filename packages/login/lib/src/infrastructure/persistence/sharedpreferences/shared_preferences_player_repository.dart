@@ -29,6 +29,12 @@ class SharedPreferencesPlayerRepository implements PlayerRepository {
     final jsonString = jsonEncode(_mapper.toJson(player));
     await _sharedPreferences.setString(_key, jsonString);
   }
+
+  @override
+  Future<bool> isRegistered() async {
+    final player = await get();
+    return player != null;
+  }
 }
 
 class PlayerMapper {

@@ -18,4 +18,7 @@ class InMemoryPlayerRepository implements PlayerRepository {
   Future<void> save(Player player) async {
     _player = player;
   }
+
+  @override
+  Future<bool> isRegistered() async => _player != null;
 }

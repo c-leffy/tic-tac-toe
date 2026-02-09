@@ -17,11 +17,13 @@ Future<void> main() async {
   runApp(const ProviderScope(child: TicTacToeApp()));
 }
 
-class TicTacToeApp extends StatelessWidget {
+class TicTacToeApp extends ConsumerWidget {
   const TicTacToeApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
     return MaterialApp.router(
       onGenerateTitle: (context) => context.coreL10n.appTitle,
       theme: appTheme,
