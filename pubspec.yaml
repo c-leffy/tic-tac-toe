@@ -26,6 +26,9 @@ melos:
     clean:
       run: melos exec -- flutter clean
       description: Clean all packages
+    gen-l10n:
+      run: melos exec -- flutter gen-l10n
+      description: Generate traduction in all packages
 
 dependencies:
   flutter:
