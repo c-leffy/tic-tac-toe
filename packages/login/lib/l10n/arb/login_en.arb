@@ -1,0 +1,6 @@
+{
+  "@@locale": "en",
+  "register": "Register",
+  "nameHint": "Enter your name",
+  "invalidName": "Please enter a valid name"
+}

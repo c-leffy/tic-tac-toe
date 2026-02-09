@@ -1,0 +1,5 @@
+arb-dir: lib/l10n/arb
+template-arb-file: login_en.arb
+output-localization-file: login_localizations.dart
+output-class: LoginLocalizations
+output-dir: lib/l10n/generated

@@ -1,0 +1,6 @@
+{
+  "@@locale": "fr",
+  "register": "S'enregistrer",
+  "nameHint": "Entrez votre nom",
+  "invalidName": "Veuillez entrer un nom valide"
+}
