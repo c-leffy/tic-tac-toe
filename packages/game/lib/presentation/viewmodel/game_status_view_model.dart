@@ -3,8 +3,8 @@ import 'package:game/l10n/game_l10n.dart';
 import 'package:game/presentation/viewmodel/game_screen_state.dart';
 
 enum GameStatusViewModel {
-  playerTurn(Color(0xFF3B82F6)),
-  iaThinking(Color(0xFFF97316)),
+  playerTurn(Color(0xFFFE7096)),
+  iaThinking(Color(0xFF2563EB)),
   victory(Color(0xFF22C55E)),
   defeat(Color(0xFFEF4444)),
   draw(Color(0xFF6B7280));
