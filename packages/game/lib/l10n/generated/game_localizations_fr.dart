@@ -9,6 +9,11 @@ class GameLocalizationsFr extends GameLocalizations {
   GameLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String welcome(String userName) {
+    return 'Bienvenue $userName, jouons !';
+  }
+
+  @override
   String get play => 'Jouer';
 
   @override

@@ -98,6 +98,12 @@ abstract class GameLocalizations {
     Locale('fr'),
   ];
 
+  /// No description provided for @welcome.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome {userName}, let\'s play !'**
+  String welcome(String userName);
+
   /// No description provided for @play.
   ///
   /// In en, this message translates to:

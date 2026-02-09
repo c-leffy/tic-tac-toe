@@ -1,5 +1,14 @@
 {
   "@@locale": "en",
+  "welcome": "Welcome {userName}, let's play !",
+  "@welcome": {
+    "placeholders": {
+      "userName": {
+        "type": "String",
+        "example": "John Doe"
+      }
+    }
+  },
   "play": "Play",
   "playAgain": "Play again",
   "chooseDifficulty": "Choose difficulty",
