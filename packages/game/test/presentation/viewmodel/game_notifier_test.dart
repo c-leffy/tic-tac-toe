@@ -1,9 +1,9 @@
 import 'package:analytics/analytics.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:game/game.dart';
 import 'package:logs/logs.dart';
 import 'package:test/expect.dart';
 import 'package:test/scaffolding.dart';
-import 'package:game/game.dart';
 
 import '../../builder/game_builder.dart';
 
@@ -12,7 +12,7 @@ void main() {
     final repository = InMemoryGameRepository(game: game);
     final container = ProviderContainer(
       overrides: [
-        gameRepositoryProvider.overrideWithValue(repository),
+        gameRepositoryProvider.overrideWith((ref) async => repository),
         iaDelayProvider.overrideWithValue(Duration.zero),
         analyticsProvider.overrideWithValue(const NoAnalytics()),
         logsProvider.overrideWithValue(const NoLogs()),
