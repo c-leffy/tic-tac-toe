@@ -9,23 +9,25 @@ Flutter Tic-Tac-Toe app — Human vs CPU, local play only. Technical challenge f
 ## Commands
 
 ```bash
-flutter pub get        # Install dependencies
-flutter test           # Run all tests
-flutter test test/game/usecases/play_game_test.dart   # Run a single test file
-flutter run            # Run on connected device/emulator
-flutter analyze        # Run static analysis (uses flutter_lints)
+flutter pub get                            # Install dependencies (from root)
+flutter test packages/game                 # Run game tests
+flutter test packages/login                # Run login tests
+flutter test packages/game/test/usecases/play_game_test.dart  # Single test file
+flutter run                                # Run app (from apps/tic_tac_toe/)
+flutter analyze apps/tic_tac_toe           # Analyze the app
+flutter analyze packages/game              # Analyze a package
 ```
 
 ## Architecture
 
-Clean Architecture (Ports & Adapters) with four layers inside each feature (e.g. `lib/game/`):
+Clean Architecture (Ports & Adapters) with four layers inside each feature package (e.g. `packages/game/`):
 
 - **domain/** — Business logic, models, exceptions, strategies. No external dependencies. All models use `Equatable` for value equality. Pure Dart only.
 - **application/** — Use cases (one class per action: `StartGame`, `PlayGame`, `PlayIa`). Each use case orchestrates domain logic. Contains `ports/` defining abstract interfaces (e.g. `GameRepository`) that the infrastructure layer implements.
 - **infrastructure/** — Implementation details: `persistence/` for repository implementations (e.g. `inmemory/InMemoryGameRepository`), `configuration/` for Riverpod provider wiring (DI).
 - **presentation/** — Flutter UI: `view/` for pages, `viewmodel/` for Riverpod AsyncNotifiers (MVI pattern), `widgets/` grouped by domain concept (`board/`, `cell/`, `game/`).
 
-Shared utilities live in `lib/core/` (e.g., `groupBy` extension on `Iterable`).
+Shared utilities live in `packages/core/` (e.g., `groupBy` extension on `Iterable`).
 
 **Dependency rule**: domain ← application ← infrastructure / presentation. Inner layers never import outer layers. Infrastructure implements application ports.
 
@@ -39,7 +41,7 @@ Shared utilities live in `lib/core/` (e.g., `groupBy` extension on `Iterable`).
 
 ## Testing
 
-Tests are in `test/game/` mirroring the source structure:
+Tests are in `packages/game/test/` mirroring the source structure:
 - `usecases/` — Use case tests (start game, play game, play IA)
 - `winning_conditions/` — Board win detection (rows, columns, diagonals)
 - `strategy/` — IA strategy tests (random, blocking, minimax)
@@ -67,11 +69,11 @@ for (final (status, expectedMessage) in scenarios) {
 
 **Faking providers:**
 ```dart
-// For Notifiers: use overrideWith
-homeNotifierProvider.overrideWith(() => FakeHomeNotifier())
+// For FutureProviders: use overrideWith
+startGameUseCaseProvider.overrideWith((ref) async => FakeStartGame())
 
-// For simple providers: use overrideWithValue
-startGameUseCaseProvider.overrideWithValue(FakeStartGame())
+// For sync providers: use overrideWithValue
+analyticsProvider.overrideWithValue(const NoAnalytics())
 ```
 
 **Faking use cases:**
@@ -173,7 +175,8 @@ class HomeNotifier extends Notifier<HomeState> {
 
   Future<void> startGame(Difficulty difficulty) async {
     state = HomeState.loading;
-    await ref.read(startGameUseCaseProvider).execute(...);
+    final startGame = await ref.read(startGameUseCaseProvider.future);
+    await startGame.execute(StartGameCommand(difficulty: difficulty));
     state = HomeState.gameStarted;
   }
 }

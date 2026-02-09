@@ -19,7 +19,7 @@ jobs:
         env:
           DOTENV_BASE64: ${{ secrets.DOTENV_BASE64 }}
         run: |
-          echo "$DOTENV_BASE64" | base64 -d > .env
+          echo "$DOTENV_BASE64" | base64 -d > apps/tic_tac_toe/.env
 
       - uses: subosito/flutter-action@v2
         with:
@@ -33,7 +33,7 @@ jobs:
         run: melos bootstrap
 
       - name: Analyze
-        run: flutter analyze
+        run: melos run analyze
 
   test:
     name: Test
@@ -45,7 +45,7 @@ jobs:
         env:
           DOTENV_BASE64: ${{ secrets.DOTENV_BASE64 }}
         run: |
-          echo "$DOTENV_BASE64" | base64 -d > .env
+          echo "$DOTENV_BASE64" | base64 -d > apps/tic_tac_toe/.env
 
       - uses: subosito/flutter-action@v2
         with:
@@ -76,8 +76,8 @@ jobs:
           DOTENV_BASE64: ${{ secrets.DOTENV_BASE64 }}
           GOOGLE_SERVICES_JSON_BASE64: ${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}
         run: |
-          printf '%s' "$DOTENV_BASE64" | base64 -d > .env
-          printf '%s' "$GOOGLE_SERVICES_JSON_BASE64" | base64 -d > android/app/google-services.json
+          printf '%s' "$DOTENV_BASE64" | base64 -d > apps/tic_tac_toe/.env
+          printf '%s' "$GOOGLE_SERVICES_JSON_BASE64" | base64 -d > apps/tic_tac_toe/android/app/google-services.json
 
       - uses: actions/setup-java@v4
         with:
@@ -96,13 +96,14 @@ jobs:
         run: melos bootstrap
 
       - name: Build APK
+        working-directory: apps/tic_tac_toe
         run: flutter build apk --release
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: app-release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          path: apps/tic_tac_toe/build/app/outputs/flutter-apk/app-release.apk
           retention-days: 7
 
   release:

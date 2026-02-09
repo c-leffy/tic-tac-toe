@@ -1,0 +1,44 @@
+name: tic_tac_toe
+description: "Technical Challenge Tic-Tac-Toe"
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.10.7
+  flutter: ">=3.0.0"
+
+resolution: workspace
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  cupertino_icons: ^1.0.8
+  flutter_riverpod: ^3.2.0
+  go_router: ^17.0.1
+  equatable: ^2.0.8
+  flutter_launcher_icons: ^0.14.4
+  firebase_core: ^4.4.0
+  firebase_crashlytics: ^5.0.7
+  flutter_dotenv: ^5.2.1
+  analytics: any
+  logs: any
+  core: any
+  game: any
+  login: any
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+  test: any
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/
+    - .env

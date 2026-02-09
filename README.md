@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="assets/icon/icon.png" alt="Tic Tac Toe" width="200">
+  <img src="apps/tic_tac_toe/assets/icon/icon.png" alt="Tic Tac Toe" width="200">
   <h1>Tic-Tac-Toe</h1>
   <img src="demo.gif" alt="Demo" width="300">
 </div>
@@ -33,6 +33,7 @@ cd tic-tac-toe
 dart run melos bootstrap
 
 # Run the app
+cd apps/tic_tac_toe
 flutter run
 ```
 
@@ -40,20 +41,20 @@ flutter run
 
 This project uses Firebase for analytics. To run the app locally, you need to configure Firebase:
 
-1. **Create your `.env` file** at the project root (see `.env.example` for required variables)
+1. **Create your `.env` file** in `apps/tic_tac_toe/` (see `.env.example` for required variables)
 
-2. **Download `google-services.json`** from [Firebase Console](https://console.firebase.google.com/) and place it in `android/app/`
+2. **Download `google-services.json`** from [Firebase Console](https://console.firebase.google.com/) and place it in `apps/tic_tac_toe/android/app/`
 
-3. **For iOS** (optional): Download `GoogleService-Info.plist` and place it in `ios/Runner/`
+3. **For iOS** (optional): Download `GoogleService-Info.plist` and place it in `apps/tic_tac_toe/ios/Runner/`
 
 #### CI/CD Configuration
 
 For GitHub Actions, add these secrets to your repository (Settings → Secrets → Actions):
 
-| Secret                        | How to generate                                                                                                |
-|-------------------------------|----------------------------------------------------------------------------------------------------------------|
-| `DOTENV_BASE64`               | `base64 -i .env` (macOS) or `base64 -w 0 .env` (Linux)                                                         |
-| `GOOGLE_SERVICES_JSON_BASE64` | `base64 -i android/app/google-services.json` (macOS) or `base64 -w 0 android/app/google-services.json` (Linux) |
+| Secret                        | How to generate                                                                                                                                  |
+|-------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------|
+| `DOTENV_BASE64`               | `base64 -i apps/tic_tac_toe/.env` (macOS) or `base64 -w 0 apps/tic_tac_toe/.env` (Linux)                                                         |
+| `GOOGLE_SERVICES_JSON_BASE64` | `base64 -i apps/tic_tac_toe/android/app/google-services.json` (macOS) or `base64 -w 0 apps/tic_tac_toe/android/app/google-services.json` (Linux) |
 
 ## Project Structure
 
@@ -61,13 +62,15 @@ This project uses a **Melos monorepo** architecture with multiple packages:
 
 ```
 tic_tac_toe/
-├── lib/                    # Main app (entry point, routing)
+├── apps/
+│   └── tic_tac_toe/        # Main Flutter app (entry point, routing)
 ├── packages/
-│   ├── analytics/          # Firebase Analytics abstraction
-│   ├── core/               # Shared UI components, theme, utilities
-│   ├── game/               # Game logic, UI, and tests
-│   └── logs/               # Logging abstraction
-└── pubspec.yaml            # Workspace configuration
+│   ├── analytics/           # Firebase Analytics abstraction
+│   ├── core/                # Shared UI components, theme, utilities
+│   ├── game/                # Game feature (logic, UI, tests)
+│   ├── login/               # Login/register feature
+│   └── logs/                # Logging abstraction
+└── pubspec.yaml             # Workspace coordinator
 ```
 
 ## Commands
@@ -82,12 +85,12 @@ tic_tac_toe/
 ### Package-specific Commands
 
 ```bash
-# Run tests for game module only
-cd packages/game && flutter test
+# Run tests for a specific package
+flutter test packages/game
+flutter test packages/login
 
-# Generate localizations for a module
-cd packages/game && flutter gen-l10n
-cd packages/core && flutter gen-l10n
+# Analyze the app
+flutter analyze apps/tic_tac_toe
 ```
 
 ## Architecture
