@@ -12,10 +12,25 @@ import 'package:tic_tac_toe/router.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await dotenv.load(fileName: '.env');
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
-  runApp(const ProviderScope(child: TicTacToeApp()));
+
+  final firebaseReady = await _initFirebase();
+  runApp(
+    ProviderScope(
+      overrides: [if (!firebaseReady) analyticsProvider.overrideWithValue(const NoAnalytics())],
+      child: const TicTacToeApp(),
+    ),
+  );
+}
+
+Future<bool> _initFirebase() async {
+  try {
+    await dotenv.load(fileName: '.env');
+    await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+    return true;
+  } catch (_) {
+    return false;
+  }
 }
 
 class TicTacToeApp extends ConsumerWidget {
