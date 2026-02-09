@@ -2,7 +2,7 @@ name: tic_tac_toe
 description: "Technical Challenge Tic-Tac-Toe"
 publish_to: 'none'
 
-version: 1.1.0+10
+version: 1.2.0+20
 
 environment:
   sdk: ^3.10.7
