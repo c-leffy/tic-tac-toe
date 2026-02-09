@@ -1,10 +1,9 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:game/l10n/game_l10n.dart';
-import 'package:game/presentation/viewmodel/home_notifier.dart';
-import 'package:game/presentation/widgets/game/difficulty_dialog.dart';
+import 'package:game/game.dart';
 import 'package:go_router/go_router.dart';
+import 'package:login/login.dart';
 
 class HomePage extends ConsumerWidget {
   const HomePage({super.key});
@@ -12,37 +11,28 @@ class HomePage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     ref.listen(homeNotifierProvider, (_, state) {
-      if (state == HomeState.gameStarted) {
-        context.go('/game');
+      if (state == .gameStarted) {
+        context.go(GameRoutes.game.path);
+      }
+      if (state == .loggedOut) {
+        context.go(LoginRoutes.register.path);
       }
     });
 
-    final isLoading = ref.watch(homeNotifierProvider) == HomeState.loading;
+    final isLoading = ref.watch(homeNotifierProvider) == .loading;
 
-    return Scaffold(
-      body: LayoutBuilder(
-        builder: (context, constraints) => SingleChildScrollView(
-          child: ConstrainedBox(
-            constraints: BoxConstraints(minHeight: constraints.maxHeight),
-            child: Center(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                spacing: Size.large,
-                children: [
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 400),
-                    child: Image.asset('assets/home.png', package: 'game'),
-                  ),
-                  isLoading
-                      ? const CircularProgressIndicator()
-                      : NeoButton.text(
-                          label: context.gameL10n.play,
-                          onPressed: () => _onPlayPressed(context, ref),
-                        ),
-                ],
-              ),
-            ),
-          ),
+    return ScrollablePage(
+      appBar: NeoAppBar.build(icon: Icons.logout, onPressed: () => _onLogoutPressed(context, ref)),
+      children: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          spacing: Size.large,
+          children: [
+            _WelcomeText(),
+            isLoading
+                ? const CircularProgressIndicator()
+                : NeoButton.text(label: context.gameL10n.play, onPressed: () => _onPlayPressed(context, ref)),
+          ],
         ),
       ),
     );
@@ -53,5 +43,28 @@ class HomePage extends ConsumerWidget {
     if (difficulty == null) return;
 
     ref.read(homeNotifierProvider.notifier).startGame(difficulty);
+  }
+
+  Future<void> _onLogoutPressed(BuildContext context, WidgetRef ref) async {
+    final homeNotifier = ref.read(homeNotifierProvider.notifier);
+    await homeNotifier.logout();
+  }
+}
+
+class _WelcomeText extends ConsumerWidget {
+  const _WelcomeText();
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final player = ref.watch(playerProvider);
+
+    return Padding(
+      padding: const EdgeInsets.all(Size.medium),
+      child: Text(
+        player.hasValue ? context.gameL10n.welcome(player.value?.name ?? "") : '',
+        textAlign: .center,
+        style: Theme.of(context).textTheme.titleLarge,
+      ),
+    );
   }
 }
